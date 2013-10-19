@@ -1,4 +1,4 @@
-nb-db
+notbed-db
 =====
 
-a small database library for small projects
+a lightweight database library for small projects
