@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.notbed.database.IEntity;
-import com.notbed.util.CloseUtil;
+import com.notbed.util.UClose;
 import com.notbed.util.NullTool;
 
 /**
@@ -120,8 +120,8 @@ class EntityMapper<I extends IEntity> {
 			rs = stmt.executeQuery(String.format(QUERY, tableName));
 			return rs.getMetaData();
 		} finally {
-			CloseUtil.RESULT_SET.evaluate(rs);
-			CloseUtil.STATEMENT.evaluate(stmt);
+			UClose.RESULT_SET.evaluate(rs);
+			UClose.STATEMENT.evaluate(stmt);
 		}
 	}
 

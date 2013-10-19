@@ -7,7 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import com.notbed.database.IInsertQuery;
-import com.notbed.util.StringUtil;
+import com.notbed.util.UString;
 
 /**
  * @author Alexandru Bledea
@@ -29,9 +29,9 @@ class InsertQuery extends SetQuery implements IInsertQuery {
 		if (set.isEmpty()) {
 			throw new IllegalStateException("Empty Set Arguments!");
 		}
-		String table = StringUtil.join(set.keySet(), ", ");
+		String table = UString.join(set.keySet(), ", ");
 		sb.append(pad(table)).append(" VALUES ");
-		String elem = StringUtil.join(PLACEHOLDER, set.size(), ", ");
+		String elem = UString.join(PLACEHOLDER, set.size(), ", ");
 		sb.append(pad(elem));
 	}
 
@@ -40,7 +40,7 @@ class InsertQuery extends SetQuery implements IInsertQuery {
 	 * @return
 	 */
 	private String pad(String s) {
-		return StringUtil.pad(s, "(", ")");
+		return UString.pad(s, "(", ")");
 	}
 
 	/* (non-Javadoc)

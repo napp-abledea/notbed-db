@@ -11,8 +11,8 @@ import java.util.List;
 
 import com.notbed.database.IEntity;
 import com.notbed.database.ISelectQuery;
-import com.notbed.util.CloseUtil;
-import com.notbed.util.StringUtil;
+import com.notbed.util.UClose;
+import com.notbed.util.UString;
 
 /**
  * @author Alexandru Bledea
@@ -29,7 +29,7 @@ class SelectQuery<I extends IEntity> extends WhereQuery<I> implements ISelectQue
 				rs = object.executeQuery();
 				return createList(rs);
 			} finally {
-				CloseUtil.RESULT_SET.evaluate(rs);
+				UClose.RESULT_SET.evaluate(rs);
 			}
 		};
 
@@ -62,7 +62,7 @@ class SelectQuery<I extends IEntity> extends WhereQuery<I> implements ISelectQue
 	 * @param sb
 	 */
 	private void addOrder(StringBuilder sb){
-		if (!StringUtil.empty(sortColumn)) {
+		if (!UString.empty(sortColumn)) {
 			sb.append(" ORDER BY ").append(sortColumn).append(" ").append(asc ? "ASC" : "DESC");
 		}
 	}
