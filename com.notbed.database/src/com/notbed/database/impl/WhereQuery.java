@@ -3,6 +3,19 @@
  */
 package com.notbed.database.impl;
 
+import static com.notbed.database.impl.LinkType.AND;
+import static com.notbed.database.impl.LinkType.OR;
+import static com.notbed.database.impl.Type.EQUALS;
+import static com.notbed.database.impl.Type.GREATER_EQUALS;
+import static com.notbed.database.impl.Type.GREATER_THAN;
+import static com.notbed.database.impl.Type.IS_NOT_NULL;
+import static com.notbed.database.impl.Type.IS_NULL;
+import static com.notbed.database.impl.Type.LESS_EQUALS;
+import static com.notbed.database.impl.Type.LESS_THAN;
+import static com.notbed.database.impl.Type.LIKE;
+import static com.notbed.database.impl.Type.NOT_EQUALS;
+import static com.notbed.database.impl.Type.NOT_LIKE;
+
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -34,7 +47,7 @@ class WhereQuery<I extends IEntity> extends Query<I> implements IWhereQuery {
 	 */
 	@Override
 	public void addEquals(String property, Object object) {
-		and(property, Type.EQUALS, object);
+		and(property, EQUALS, object);
 	}
 
 	/* (non-Javadoc)
@@ -42,7 +55,7 @@ class WhereQuery<I extends IEntity> extends Query<I> implements IWhereQuery {
 	 */
 	@Override
 	public void addOrEquals(String property, Object value) {
-		or(property, Type.EQUALS, value);
+		or(property, EQUALS, value);
 	}
 
 	/* (non-Javadoc)
@@ -50,7 +63,7 @@ class WhereQuery<I extends IEntity> extends Query<I> implements IWhereQuery {
 	 */
 	@Override
 	public void addNotEquals(String property, Object object) {
-		and(property, Type.NOT_EQUALS, object);
+		and(property, NOT_EQUALS, object);
 	}
 
 	/* (non-Javadoc)
@@ -58,7 +71,7 @@ class WhereQuery<I extends IEntity> extends Query<I> implements IWhereQuery {
 	 */
 	@Override
 	public void addOrNotEquals(String property, Object value) {
-		or(property, Type.NOT_EQUALS, value);
+		or(property, NOT_EQUALS, value);
 	}
 
 	/* (non-Javadoc)
@@ -66,7 +79,7 @@ class WhereQuery<I extends IEntity> extends Query<I> implements IWhereQuery {
 	 */
 	@Override
 	public void addNull(String property) {
-		and(property, Type.IS_NULL, null);
+		and(property, IS_NULL, null);
 	}
 
 	/* (non-Javadoc)
@@ -74,7 +87,7 @@ class WhereQuery<I extends IEntity> extends Query<I> implements IWhereQuery {
 	 */
 	@Override
 	public void addOrNull(String property) {
-		or(property, Type.IS_NULL, null);
+		or(property, IS_NULL, null);
 	}
 
 	/* (non-Javadoc)
@@ -82,7 +95,7 @@ class WhereQuery<I extends IEntity> extends Query<I> implements IWhereQuery {
 	 */
 	@Override
 	public void addNotNull(String property) {
-		and(property, Type.IS_NOT_NULL, null);
+		and(property, IS_NOT_NULL, null);
 	}
 
 	/* (non-Javadoc)
@@ -90,7 +103,7 @@ class WhereQuery<I extends IEntity> extends Query<I> implements IWhereQuery {
 	 */
 	@Override
 	public void addOrNotNull(String property) {
-		or(property, Type.IS_NOT_NULL, null);
+		or(property, IS_NOT_NULL, null);
 	}
 
 	/* (non-Javadoc)
@@ -106,7 +119,7 @@ class WhereQuery<I extends IEntity> extends Query<I> implements IWhereQuery {
 	 */
 	@Override
 	public void addLike(String property, Object value) {
-		and(property, Type.LIKE, value);
+		and(property, LIKE, value);
 	}
 
 	/* (non-Javadoc)
@@ -114,7 +127,7 @@ class WhereQuery<I extends IEntity> extends Query<I> implements IWhereQuery {
 	 */
 	@Override
 	public void addOrLike(String property, Object value) {
-		or(property, Type.LIKE, value);
+		or(property, LIKE, value);
 	}
 
 	/* (non-Javadoc)
@@ -122,7 +135,7 @@ class WhereQuery<I extends IEntity> extends Query<I> implements IWhereQuery {
 	 */
 	@Override
 	public void addNotLike(String property, Object value) {
-		and(property, Type.NOT_LIKE, value);
+		and(property, NOT_LIKE, value);
 	}
 
 	/* (non-Javadoc)
@@ -130,7 +143,71 @@ class WhereQuery<I extends IEntity> extends Query<I> implements IWhereQuery {
 	 */
 	@Override
 	public void addOrNotLike(String property, Object value) {
-		or(property, Type.NOT_LIKE, value);
+		or(property, NOT_LIKE, value);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.notbed.database.IWhereQuery#addGreaterThan(java.lang.String, java.lang.Object)
+	 */
+	@Override
+	public void addGreaterThan(String property, Object value) {
+		and(property, GREATER_THAN, value);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.notbed.database.IWhereQuery#addOrGreaterThan(java.lang.String, java.lang.Object)
+	 */
+	@Override
+	public void addOrGreaterThan(String property, Object value) {
+		or(property, GREATER_THAN, value);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.notbed.database.IWhereQuery#addLessThan(java.lang.String, java.lang.Object)
+	 */
+	@Override
+	public void addLessThan(String property, Object value) {
+		and(property, LESS_THAN, value);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.notbed.database.IWhereQuery#addOrLessThan(java.lang.String, java.lang.Object)
+	 */
+	@Override
+	public void addOrLessThan(String property, Object value) {
+		or(property, LESS_THAN, value);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.notbed.database.IWhereQuery#addGreaterEquals(java.lang.String, java.lang.Object)
+	 */
+	@Override
+	public void addGreaterEquals(String property, Object value) {
+		and(property, GREATER_EQUALS, value);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.notbed.database.IWhereQuery#addOrGreaterEquals(java.lang.String, java.lang.Object)
+	 */
+	@Override
+	public void addOrGreaterEquals(String property, Object value) {
+		or(property, GREATER_EQUALS, value);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.notbed.database.IWhereQuery#addLessEquals(java.lang.String, java.lang.Object)
+	 */
+	@Override
+	public void addLessEquals(String property, Object value) {
+		and(property, LESS_EQUALS, value);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.notbed.database.IWhereQuery#addOrLessEquals(java.lang.String, java.lang.Object)
+	 */
+	@Override
+	public void addOrLessEquals(String property, Object value) {
+		or(property, LESS_EQUALS, value);
 	}
 
 	/**
@@ -149,7 +226,7 @@ class WhereQuery<I extends IEntity> extends Query<I> implements IWhereQuery {
 	 * @param object
 	 */
 	private void and(String property, Type t, Object object) {
-		aux(property, LinkType.AND, t, object);
+		aux(property, AND, t, object);
 	}
 
 	/**
@@ -158,7 +235,7 @@ class WhereQuery<I extends IEntity> extends Query<I> implements IWhereQuery {
 	 * @param object
 	 */
 	private void or(String property, Type t, Object object) {
-		aux(property, LinkType.OR, t, object);
+		aux(property, OR, t, object);
 	}
 
 	/**
@@ -211,10 +288,10 @@ class WhereQuery<I extends IEntity> extends Query<I> implements IWhereQuery {
 			if (object == null) {
 				switch (op) {
 					case EQUALS:
-						op = Type.IS_NULL;
+						op = IS_NULL;
 						break;
 					case NOT_EQUALS:
-						op = Type.IS_NOT_NULL;
+						op = IS_NOT_NULL;
 						break;
 				}
 			}
@@ -238,7 +315,6 @@ class WhereQuery<I extends IEntity> extends Query<I> implements IWhereQuery {
 				args.add(object);
 				addPlaceHolder(sb);
 			}
-
 		}
 
 		/**

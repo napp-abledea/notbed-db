@@ -114,10 +114,10 @@ class SelectQuery<I extends IEntity> extends WhereQuery<I> implements ISelectQue
 		this.limitMax = max;
 	}
 
-	/**
-	 * @param property
-	 * @param asc
+	/* (non-Javadoc)
+	 * @see com.notbed.database.ISelectQuery#setOrderBy(java.lang.String, boolean)
 	 */
+	@Override
 	public void setOrderBy(String property, boolean asc) {
 		sortColumn = property;
 		this.asc = asc;

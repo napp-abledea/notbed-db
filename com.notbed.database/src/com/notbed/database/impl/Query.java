@@ -12,6 +12,8 @@ import com.notbed.database.IEntity;
  */
 abstract class Query<I extends IEntity> extends BaseQuery<I> {
 
+	protected static final String PLACEHOLDER = "?";
+
 	private final String prefix;
 
 	/**

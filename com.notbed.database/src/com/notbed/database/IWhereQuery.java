@@ -77,4 +77,52 @@ public interface IWhereQuery {
 	 */
 	void addOrNotLike(String property, Object value);
 
+	/**
+	 * @param property
+	 * @param value
+	 */
+	void addGreaterThan(String property, Object value);
+
+	/**
+	 * @param property
+	 * @param value
+	 */
+	void addOrGreaterThan(String property, Object value);
+
+	/**
+	 * @param property
+	 * @param value
+	 */
+	void addLessThan(String property, Object value);
+
+	/**
+	 * @param property
+	 * @param value
+	 */
+	void addOrLessThan(String property, Object value);
+
+	/**
+	 * @param property
+	 * @param value
+	 */
+	void addGreaterEquals(String property, Object value);
+
+	/**
+	 * @param property
+	 * @param value
+	 */
+	void addOrGreaterEquals(String property, Object value);
+
+	/**
+	 * @param property
+	 * @param value
+	 */
+	void addLessEquals(String property, Object value);
+
+	/**
+	 * @param property
+	 * @param value
+	 */
+	void addOrLessEquals(String property, Object value);
+
 }

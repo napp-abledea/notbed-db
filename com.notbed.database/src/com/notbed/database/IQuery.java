@@ -9,8 +9,6 @@ package com.notbed.database;
  */
 public interface IQuery {
 
-	public static final String PLACEHOLDER = "?";
-
 	/**
 	 *
 	 */
