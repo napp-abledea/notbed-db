@@ -3,6 +3,8 @@
  */
 package com.notbed.database.impl;
 
+import static com.notbed.util.UClose.CLOSE_STATEMENT;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -11,9 +13,8 @@ import java.util.Collection;
 
 import com.notbed.database.IEntity;
 import com.notbed.database.IQuery;
-import com.notbed.util.UClose;
-import com.notbed.util.IEvaluatorWithException;
 import com.notbed.util.NullTool;
+import com.notbed.util.mass.IEvaluatorWithException;
 
 /**
  * @author Alexandru Bledea
@@ -69,7 +70,7 @@ abstract class BaseQuery<I extends IEntity> implements IQuery {
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		} finally {
-			UClose.STATEMENT.evaluate(ps);
+			CLOSE_STATEMENT.evaluate(ps);
 			dao.closeConnection(con);
 		}
 	}

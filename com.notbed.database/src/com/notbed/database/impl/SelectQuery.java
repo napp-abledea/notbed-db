@@ -3,6 +3,8 @@
  */
 package com.notbed.database.impl;
 
+import static com.notbed.util.UClose.CLOSE_RESULT_SET;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -11,7 +13,6 @@ import java.util.List;
 
 import com.notbed.database.IEntity;
 import com.notbed.database.ISelectQuery;
-import com.notbed.util.UClose;
 import com.notbed.util.UString;
 
 /**
@@ -29,7 +30,7 @@ class SelectQuery<I extends IEntity> extends WhereQuery<I> implements ISelectQue
 				rs = object.executeQuery();
 				return createList(rs);
 			} finally {
-				UClose.RESULT_SET.evaluate(rs);
+				CLOSE_RESULT_SET.evaluate(rs);
 			}
 		};
 
