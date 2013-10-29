@@ -92,7 +92,7 @@ public abstract class DAO<I extends IEntity> implements IDAO<I> {
 	public IUpdateQuery update(Integer id) {
 		UpdateQuery updateQuery = new UpdateQuery(this);
 		if (id != null) {
-			updateQuery.set("id", id);
+			updateQuery.addEquals("id", id);
 		}
 		return updateQuery;
 	}

@@ -6,7 +6,6 @@ package com.notbed.database.impl;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import com.notbed.database.IEntity;
@@ -20,10 +19,10 @@ import com.notbed.util.UString;
  */
 class SelectQuery<I extends IEntity> extends WhereQuery<I> implements ISelectQuery<I> {
 
-	private final PreparedStatementEvaluator<Collection<I>> RESULTSET_RESULT = new PreparedStatementEvaluator<Collection<I>>() {
+	private final PreparedStatementEvaluator<List<I>> RESULTSET_RESULT = new PreparedStatementEvaluator<List<I>>() {
 
 		@Override
-		public Collection<I> evaluate(PreparedStatement object) throws Exception {
+		public List<I> evaluate(PreparedStatement object) throws Exception {
 			ResultSet rs = null;
 			try {
 				rs = object.executeQuery();
@@ -78,7 +77,7 @@ class SelectQuery<I extends IEntity> extends WhereQuery<I> implements ISelectQue
 	* @see com.notbed.database.IQuery#executeQuery()
 	*/
 	@Override
-	public Collection<I> executeQuery() {
+	public List<I> executeQuery() {
 		return execute(RESULTSET_RESULT);
 	}
 
@@ -87,7 +86,7 @@ class SelectQuery<I extends IEntity> extends WhereQuery<I> implements ISelectQue
 	 * @return
 	 * @throws Exception
 	 */
-	private Collection<I> createList(ResultSet executeQuery) throws Exception {
+	private List<I> createList(ResultSet executeQuery) throws Exception {
 		List<I> list = new ArrayList();
 		int columnCount = executeQuery.getMetaData().getColumnCount();
 		EntityMapper<I> entityMapper = dao.getEntityMapper();
