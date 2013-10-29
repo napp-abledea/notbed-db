@@ -71,7 +71,30 @@ public abstract class DAO<I extends IEntity> implements IDAO<I> {
 	 */
 	@Override
 	public IUpdateQuery update() {
-		return new UpdateQuery(this);
+		return update((Integer) null);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.notbed.database.IDAO#update(com.notbed.database.IEntity)
+	 */
+	@Override
+	public IUpdateQuery update(I entity) {
+		if (entity == null) {
+			throw new IllegalArgumentException("Entity is null");
+		}
+		return update(entity.getId());
+	}
+
+	/* (non-Javadoc)
+	 * @see com.notbed.database.IDAO#update(java.lang.Integer)
+	 */
+	@Override
+	public IUpdateQuery update(Integer id) {
+		UpdateQuery updateQuery = new UpdateQuery(this);
+		if (id != null) {
+			updateQuery.addEquals("id", id);
+		}
+		return updateQuery;
 	}
 
 	/* (non-Javadoc)

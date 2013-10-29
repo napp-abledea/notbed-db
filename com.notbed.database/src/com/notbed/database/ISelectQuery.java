@@ -3,7 +3,7 @@
  */
 package com.notbed.database;
 
-import java.util.Collection;
+import java.util.List;
 
 /**
  * @author Alexandru Bledea
@@ -31,5 +31,5 @@ public interface ISelectQuery<I extends IEntity> extends IQuery, IWhereQuery {
 	/**
 	 * @return
 	 */
-	Collection<I> executeQuery();
+	List<I> executeQuery();
 }
