@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import com.notbed.database.IEntity;
-import com.notbed.database.IQuery;
+import com.notbed.database.IExecutableQuery;
 import com.notbed.util.NullTool;
 import com.notbed.util.mass.IEvaluatorWithException;
 
@@ -20,7 +20,7 @@ import com.notbed.util.mass.IEvaluatorWithException;
  * @author Alexandru Bledea
  * @since Sep 22, 2013
  */
-abstract class BaseQuery<I extends IEntity> implements IQuery {
+abstract class BaseQuery<I extends IEntity> implements IExecutableQuery {
 
 	private static PreparedStatementEvaluator<Boolean> BOOLEAN_RESULT = new PreparedStatementEvaluator<Boolean>() {
 
@@ -45,8 +45,8 @@ abstract class BaseQuery<I extends IEntity> implements IQuery {
 	 * @see com.notbed.database.IQuery#execute()
 	 */
 	@Override
-	public final void execute() {
-		execute(BOOLEAN_RESULT);
+	public final boolean execute() {
+		return execute(BOOLEAN_RESULT);
 	}
 
 	/**

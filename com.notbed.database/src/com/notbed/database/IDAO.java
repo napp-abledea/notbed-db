@@ -42,6 +42,16 @@ public interface IDAO<I extends IEntity> {
 	IDeleteQuery delete();
 
 	/**
+	 * @param entity
+	 */
+	void delete(I entity);
+
+	/**
+	 * @param id
+	 */
+	void delete(int id);
+
+	/**
 	 * @return
 	 */
 	IFreeQuery freeQuery();

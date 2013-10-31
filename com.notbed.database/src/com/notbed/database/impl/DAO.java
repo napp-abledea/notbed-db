@@ -106,6 +106,25 @@ public abstract class DAO<I extends IEntity> implements IDAO<I> {
 	}
 
 	/* (non-Javadoc)
+	 * @see com.notbed.database.IDAO#delete(com.notbed.database.IEntity)
+	 */
+	@Override
+	public void delete(I entity) {
+		NullTool.forbidNull(entity, "No entity provided!");
+		delete(entity.getId());
+	};
+
+	/* (non-Javadoc)
+	 * @see com.notbed.database.IDAO#delete(int)
+	 */
+	@Override
+	public void delete(int id) {
+		IDeleteQuery delete = delete();
+		delete.addEquals("id", id);
+		delete.execute();
+	}
+
+	/* (non-Javadoc)
 	 * @see com.notbed.database.DAO#freeQuery()
 	 */
 	@Override
