@@ -3,6 +3,9 @@
  */
 package com.notbed.database.impl;
 
+import static com.notbed.util.UClose.CLOSE_RESULT_SET;
+import static com.notbed.util.UClose.CLOSE_STATEMENT;
+
 import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
 import java.beans.Introspector;
@@ -21,7 +24,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.notbed.database.IEntity;
-import com.notbed.util.UClose;
 import com.notbed.util.NullTool;
 
 /**
@@ -120,8 +122,8 @@ class EntityMapper<I extends IEntity> {
 			rs = stmt.executeQuery(String.format(QUERY, tableName));
 			return rs.getMetaData();
 		} finally {
-			UClose.RESULT_SET.evaluate(rs);
-			UClose.STATEMENT.evaluate(stmt);
+			CLOSE_RESULT_SET.evaluate(rs);
+			CLOSE_STATEMENT.evaluate(stmt);
 		}
 	}
 
